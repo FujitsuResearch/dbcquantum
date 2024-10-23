@@ -4,6 +4,7 @@
 
 poetry run isort src
 poetry run black src
+poetry run black notebook
 poetry run pyright src
 poetry run flake8 src/test --max-line-length=130
 poetry run pytest src/test/
