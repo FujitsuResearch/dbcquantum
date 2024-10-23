@@ -1,0 +1,40 @@
+[tool.poetry]
+name = "dbcquantum"
+version = "1.0.0"
+license = "BSD-3-Clause-Clear"
+description = "Design by Contract framework for quantum software"
+authors = ["Masaomi Yamaguchi <y.masaomi@fujitsu.com>"]
+packages = [
+    { include = "dbcquantum", from = "src"}
+]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+qiskit = "^0.41.1"
+
+[tool.poetry.group.jupyter.dependencies]
+jupyter = ">=1.0.0"
+matplotlib = ">=3.7.0"
+pylatexenc = ">=2.10"
+
+[tool.poetry.group.dev.dependencies]
+black = {extras = ["jupyter"], version = ">=23.11.0"}
+isort = ">=5.12.0"
+flake8 = ">=6.0.0"
+pyright = ">=1.1.294"
+pytest = ">=7.2.1"
+pandas = ">=1.5.3"
+sphinx = ">=6.1.3"
+furo = ">=2022.12.7"
+sphinx-copybutton = ">=0.5.1"
+pip-licenses = ">=4.4.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.isort]
+profile="black"
+
+[tool.pyright]
+typeCheckingMode="basic"
