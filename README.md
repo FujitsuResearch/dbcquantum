@@ -36,6 +36,9 @@ An example of a failed pattern.
 python example/hadamard_test/fail.py 
 ```
 
+The API references are available at
+https://fujitsuresearch.github.io/dbcquantum/
+
 ## Examples of Our Paper
 
 Please refer to the `notebook/paper` directory.
