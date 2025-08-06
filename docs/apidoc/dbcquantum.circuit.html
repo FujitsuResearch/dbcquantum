@@ -1,0 +1,1420 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="dbcquantum.common module" href="dbcquantum.common.html" /><link rel="prev" title="dbcquantum package" href="dbcquantum.html" />
+
+    <!-- Generated with Sphinx 7.3.6 and Furo 2024.01.29 -->
+        <title>dbcquantum.circuit module - DbCQuantum v1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">DbCQuantum v1.0.0 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  
+  <span class="sidebar-brand-text">DbCQuantum v1.0.0 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="modules.html">dbcquantum</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of dbcquantum</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current has-children"><a class="reference internal" href="dbcquantum.html">dbcquantum package</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of dbcquantum package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">dbcquantum.circuit module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dbcquantum.common.html">dbcquantum.common module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dbcquantum.err.html">dbcquantum.err module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dbcquantum.utils.html">dbcquantum.utils module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="module-dbcquantum.circuit">
+<span id="dbcquantum-circuit-module"></span><h1>dbcquantum.circuit module<a class="headerlink" href="#module-dbcquantum.circuit" title="Link to this heading">¶</a></h1>
+<p>The main module of this framework.
+It consists of the AssertQuantumCircuit class and the AQCMeasure class.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="dbcquantum.circuit.AQCMeasure">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dbcquantum.circuit.</span></span><span class="sig-name descname"><span class="pre">AQCMeasure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">aqc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit" title="dbcquantum.circuit.AssertQuantumCircuit"><span class="pre">AssertQuantumCircuit</span></a><span class="p"><span class="pre">[</span></span><span class="pre">P</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">postprocess</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Result</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">R</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qubit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dbcquantum/circuit.html#AQCMeasure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbcquantum.circuit.AQCMeasure" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dbcquantum.circuit.</span></span><span class="sig-name descname"><span class="pre">AQCMeasure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">aqc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit" title="dbcquantum.circuit.AssertQuantumCircuit"><span class="pre">AssertQuantumCircuit</span></a><span class="p"><span class="pre">[</span></span><span class="pre">Q</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">postprocess</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Result</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">R</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qubit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param_converter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">P</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Q</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">R</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">P</span></code>]</p>
+<p>A class to measure the quantum circuit and postprocess the measurement result.
+This class is parameterized by R and P,
+which stand for the postprocessed measurement result and the runtime parameter
+for the assertions respectively.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>aqc</strong> (<a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit" title="dbcquantum.circuit.AssertQuantumCircuit"><em>AssertQuantumCircuit</em></a><em>[</em><em>Q</em><em>]</em>) – A quantum circuit to be measured.</p></li>
+<li><p><strong>postprocess</strong> (<em>Callable</em><em>[</em><em>[</em><em>Result</em><em>]</em><em>, </em><em>R</em><em>]</em>) – Postprocessing of the measurement result.</p></li>
+<li><p><strong>qubit</strong> (<em>Iterable</em><em>[</em><em>QubitSpecifier</em><em>] </em><em>| </em><em>None</em><em>, </em><em>optional</em>) – The qubits to be measured.
+If omitted, all qubits will be measured.</p></li>
+<li><p><strong>param_converter</strong> (<em>Callable</em><em>[</em><em>[</em><em>P</em><em>]</em><em>, </em><em>Q</em><em>] </em><em>| </em><em>None</em><em>, </em><em>optional</em>) – A function that converts the runtime parameter for this class
+to the parameter for the inner quantum circuit.
+If not provided, it defaults to the identity function.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="dbcquantum.circuit.AQCMeasure.add_condition">
+<span class="sig-name descname"><span class="pre">add_condition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Statevector</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Result</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">R</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">focus_qubits</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dbcquantum/circuit.html#AQCMeasure.add_condition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbcquantum.circuit.AQCMeasure.add_condition" title="Link to this definition">¶</a></dt>
+<dd><p>Adds an assertion that is related to the quantum state just before the measurement,
+the raw data of the measurement result, and the postprocessed measurement result.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – The name (tag) of the assertion.
+This is displayed when an error occurs to identify which assertion is
+not established.</p></li>
+<li><p><strong>condition</strong> (<em>Callable</em><em>[</em><em>[</em><em>Statevector</em><em>, </em><em>Result</em><em>, </em><em>R</em><em>]</em><em>, </em><em>bool</em><em>]</em>) – The body of the assertion. It takes the quantum state just before
+the measurement, the raw data of the measurement result,
+and the postprocessed measurement result,
+and returns a boolean indicating whether the assertion is satisfied.</p></li>
+<li><p><strong>focus_qubits</strong> (<em>Iterable</em><em>[</em><em>QubitSpecifier</em><em>] </em><em>| </em><em>None</em><em>, </em><em>optional</em>) – The qubits that are related to the assertions.
+Only the statevector of the specified qubits is extracted and passed
+to the condition.
+This parameter only affects the statevector passed to the assertion.
+If not specified, all qubits are considered.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbcquantum.circuit.AQCMeasure.add_condition_use_param">
+<span class="sig-name descname"><span class="pre">add_condition_use_param</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Statevector</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Result</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">R</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">P</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">focus_qubits</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dbcquantum/circuit.html#AQCMeasure.add_condition_use_param"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbcquantum.circuit.AQCMeasure.add_condition_use_param" title="Link to this definition">¶</a></dt>
+<dd><p>Adds an assertion that is related to the quantum state just before the measurement,
+the raw data of the measurement result, and the postprocessed measurement result.
+The assertion can also use the runtime parameter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – The name (tag) of the assertion.
+This is displayed when an error occurs to identify which assertion is
+not established.</p></li>
+<li><p><strong>condition</strong> (<em>Callable</em><em>[</em><em>[</em><em>Statevector</em><em>, </em><em>Result</em><em>, </em><em>R</em><em>, </em><em>P</em><em>]</em><em>, </em><em>bool</em><em>]</em>) – The body of the assertion. It takes the quantum state just before
+the measurement, the raw data of the measurement result,
+the postprocessed measurement result and rutime parameter,
+and returns a boolean indicating whether the assertion is satisfied.</p></li>
+<li><p><strong>focus_qubits</strong> (<em>Iterable</em><em>[</em><em>QubitSpecifier</em><em>] </em><em>| </em><em>None</em><em>, </em><em>optional</em>) – The qubits that are related to the assertions.
+Only the statevector of the specified qubits is extracted and passed
+to the condition.
+This parameter only affects the statevector passed to the assertion.
+If not specified, all qubits are considered.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbcquantum.circuit.AQCMeasure.add_conditions_gen">
+<span class="sig-name descname"><span class="pre">add_conditions_gen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">conditon_gen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">P</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Statevector</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Result</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">R</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dbcquantum/circuit.html#AQCMeasure.add_conditions_gen"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbcquantum.circuit.AQCMeasure.add_conditions_gen" title="Link to this definition">¶</a></dt>
+<dd><p>Adds a generator that generates assertions from the runtime parameter.
+The assertions here are related to the quantum state just before the measurement,
+the raw data of the measurement result, and the postprocessed measurement result.
+Each assertion is a tuple where the first element is a tag (name) of the assertion
+and the second element is the body of the assertion.
+The tag is displayed when an error occurs to identify which assertion is not established.
+The body of the assertion is a function that takes the quantum state just before
+the measurement, the raw data of the measurement result, and the postprocessed
+measurement result, and returns a boolean indicating whether the assertion is satisfied.
+The assertions are checked after the execution of the circuit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>conditon_gen</strong> – (Callable[ [P], list[tuple[str, Callable[[Statevector, Result, R], bool]]] ]):
+A function that generates a list of assertions from the runtime parameter.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dbcquantum.circuit.AQCMeasure.num_qubits">
+<span class="sig-name descname"><span class="pre">num_qubits</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#dbcquantum.circuit.AQCMeasure.num_qubits" title="Link to this definition">¶</a></dt>
+<dd><p>The number of qubits in the quantum circuit.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbcquantum.circuit.AQCMeasure.remove_assertions">
+<span class="sig-name descname"><span class="pre">remove_assertions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">QuantumCircuit</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Result</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">R</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/dbcquantum/circuit.html#AQCMeasure.remove_assertions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbcquantum.circuit.AQCMeasure.remove_assertions" title="Link to this definition">¶</a></dt>
+<dd><p>Removes all assertions and returns a pair of
+the quantum circuit and the postprocessing.
+The quantum circuit is written in Qiskit,
+so you can run it on an actual quantum computer by Qiskit
+without providing the runtime parameters for the assertions.
+This method removes assertions from a copy of the instance of this class,
+so it does not affect the original instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The assertion-less quantum circuit and postprocessing.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple[QuantumCircuit, Callable[[Result], R]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbcquantum.circuit.AQCMeasure.remove_assertions_to_circuit">
+<span class="sig-name descname"><span class="pre">remove_assertions_to_circuit</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">QuantumCircuit</span></span></span><a class="reference internal" href="../_modules/dbcquantum/circuit.html#AQCMeasure.remove_assertions_to_circuit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbcquantum.circuit.AQCMeasure.remove_assertions_to_circuit" title="Link to this definition">¶</a></dt>
+<dd><p>Removes all assertions and returns a QuantumCircuit that is written in Qiskit.
+You can run it on an actual quantum computer by Qiskit
+without providing the runtime parameters for the assertions.
+This method removes assertions from a copy of the circuit,
+so it does not affect the original circuit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The assertion-less quantum circuit.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>QuantumCircuit</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbcquantum.circuit.AQCMeasure.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shots</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">backend</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">AerBackend</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">AerSimulator()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init_state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Statevector</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">OperatorBase</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">complex</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed_simulator</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">None</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">R</span></span></span><a class="reference internal" href="../_modules/dbcquantum/circuit.html#AQCMeasure.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbcquantum.circuit.AQCMeasure.run" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shots</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">backend</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">AerBackend</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">AerSimulator()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init_state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Statevector</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">OperatorBase</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">complex</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">P</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed_simulator</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">None</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">R</span></span></span></dt>
+<dd><p>Executes the quantum circuit, measures qubits,
+and postprocesses the measurement result while checking assertions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>shots</strong> (<em>int</em>) – The number of repetitions of the circuit to be run.</p></li>
+<li><p><strong>backend</strong> (<em>AerBackend</em><em>, </em><em>optional</em>) – The backend to execute the circuit on. Defaults to AerSimulator().</p></li>
+<li><p><strong>init_state</strong> – (Statevector  |  OperatorBase  |  list[complex]  |  np.ndarray  |  None, optional):
+The initial state to run the circuit.
+If omitted, it is set to 0 … 0.</p></li>
+<li><p><strong>param</strong> (<em>P</em><em> | </em><em>None</em><em>, </em><em>optional</em>) – The runtime parameter for the assertions.
+If omitted, it is set to None.</p></li>
+<li><p><strong>seed_simulator</strong> (<em>None</em><em> | </em><em>int</em><em>, </em><em>optional</em>) – The seed of the simulator to fix the measurement result on each run.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The postprocessed measurement result.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>R</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbcquantum.circuit.AQCMeasure.run_without_assertion">
+<span class="sig-name descname"><span class="pre">run_without_assertion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shots</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">backend</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">AerBackend</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">AerSimulator('aer_simulator')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init_state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Statevector</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">OperatorBase</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">complex</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed_simulator</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">None</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">R</span></span></span><a class="reference internal" href="../_modules/dbcquantum/circuit.html#AQCMeasure.run_without_assertion"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbcquantum.circuit.AQCMeasure.run_without_assertion" title="Link to this definition">¶</a></dt>
+<dd><p>Executes the quantum circuit, measures qubits,
+and postprocesses the measurement result without checking assertions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>shots</strong> (<em>int</em>) – The number of repetitions of the circuit to be run.</p></li>
+<li><p><strong>backend</strong> (<em>AerBackend</em><em>, </em><em>optional</em>) – The backend to execute the circuit on. Defaults to AerSimulator().</p></li>
+<li><p><strong>init_state</strong> – (Statevector  |  OperatorBase  |  list[complex]  |  np.ndarray  |  None, optional):
+The initial state to run the circuit.
+If omitted, it is set to 0 … 0.</p></li>
+<li><p><strong>seed_simulator</strong> (<em>None</em><em> | </em><em>int</em><em>, </em><em>optional</em>) – The seed of the simulator to fix the measurement result on each run.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The postprocessed measurement result.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>R</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dbcquantum.circuit.AssertQuantumCircuit">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dbcquantum.circuit.</span></span><span class="sig-name descname"><span class="pre">AssertQuantumCircuit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_qubits</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dbcquantum/circuit.html#AssertQuantumCircuit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbcquantum.circuit.AssertQuantumCircuit" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">P</span></code>]</p>
+<p>A class to construct a quantum circuit with assertions.
+This class is parameterized by P, which stands for the runtime parameter for the assertions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>num_qubits</strong> (<em>int</em>) – The number of qubits in the quantum circuit.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="dbcquantum.circuit.AssertQuantumCircuit.add_condition">
+<span class="sig-name descname"><span class="pre">add_condition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Statevector</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Statevector</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">focus_qubits</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dbcquantum/circuit.html#AssertQuantumCircuit.add_condition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbcquantum.circuit.AssertQuantumCircuit.add_condition" title="Link to this definition">¶</a></dt>
+<dd><p>Adds an assertion that is related to both the prestate and poststate of the circuit.
+The assertion is checked after the execution of the circuit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – The name (tag) of the assertion.
+This is displayed when an error occurs to identify which assertion is
+not established.</p></li>
+<li><p><strong>condition</strong> (<em>Callable</em><em>[</em><em>[</em><em>Statevector</em><em>, </em><em>Statevector</em><em>]</em><em>, </em><em>bool</em><em>]</em>) – The body of the assertion. It takes the prestate and poststate of
+the circuit and returns a boolean value indicating
+whether the assertion is satisfied.</p></li>
+<li><p><strong>focus_qubits</strong> (<em>Iterable</em><em>[</em><em>QubitSpecifier</em><em>] </em><em>| </em><em>None</em><em>, </em><em>optional</em>) – The qubits that are related to the assertions.
+Only the statevector of the specified qubits is extracted and passed
+to the condition.
+If not specified, all qubits are considered. Defaults to None.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbcquantum.circuit.AssertQuantumCircuit.add_condition_use_param">
+<span class="sig-name descname"><span class="pre">add_condition_use_param</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Statevector</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Statevector</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">P</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">focus_qubits</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dbcquantum/circuit.html#AssertQuantumCircuit.add_condition_use_param"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbcquantum.circuit.AssertQuantumCircuit.add_condition_use_param" title="Link to this definition">¶</a></dt>
+<dd><p>Adds an assertion that is related to both the prestate and poststate of the circuit.
+The assertion can also use the runtime parameter.
+The assertion is checked after the execution of the circuit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – The name (tag) of the assertion.
+This is displayed when an error occurs to identify which assertion is
+not established.</p></li>
+<li><p><strong>condition</strong> (<em>Callable</em><em>[</em><em>[</em><em>Statevector</em><em>, </em><em>Statevector</em><em>, </em><em>P</em><em>]</em><em>, </em><em>bool</em><em>]</em>) – The body of the assertion.
+It takes the prestate, poststate, and the runtime parameter,
+and returns a boolean value indicating whether the assertion is satisfied.</p></li>
+<li><p><strong>focus_qubits</strong> (<em>Iterable</em><em>[</em><em>QubitSpecifier</em><em>] </em><em>| </em><em>None</em><em>, </em><em>optional</em>) – The qubits that are related to the assertions.
+Only the statevector of the specified qubits is extracted and passed
+to the condition.
+If not specified, all qubits are considered. Defaults to None.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbcquantum.circuit.AssertQuantumCircuit.add_conditions_gen">
+<span class="sig-name descname"><span class="pre">add_conditions_gen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">conditions_gen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">P</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Statevector</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Statevector</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dbcquantum/circuit.html#AssertQuantumCircuit.add_conditions_gen"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbcquantum.circuit.AssertQuantumCircuit.add_conditions_gen" title="Link to this definition">¶</a></dt>
+<dd><p>Adds a generator that generates assertions from the runtime parameter.
+The assertions here are related to both the prestate and poststate of the circuit.
+Each assertion is a tuple where the first element is a tag (name) of the assertion
+and the second element is the body of the assertion.
+The tag is displayed when an error occurs to identify which assertion is not established.
+The body of the assertion is a function that takes two Statevector instances (representing
+the prestate and poststate of the circuit) and returns a boolean indicating
+whether the assertion is satisfied.
+The assertions are checked after the execution of the circuit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>conditions_gen</strong> – (Callable[[P], list[tuple[str, Callable[[Statevector, Statevector], bool]]]]):
+A function that generates a list of assertions from the runtime parameter.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbcquantum.circuit.AssertQuantumCircuit.add_eq_circuit">
+<span class="sig-name descname"><span class="pre">add_eq_circuit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">circuit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">QuantumCircuit</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dbcquantum/circuit.html#AssertQuantumCircuit.add_eq_circuit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbcquantum.circuit.AssertQuantumCircuit.add_eq_circuit" title="Link to this definition">¶</a></dt>
+<dd><p>Adds a circuit that is checked for equivalence with this circuit.
+The equivalence is checked by comparing the state vectors after running them.
+The global phases are ignored.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – The name (tag) of the circuit.
+This is displayed when an error occurs to identify which circuit is not equivalent.</p></li>
+<li><p><strong>circuit</strong> (<em>QuantumCircuit</em>) – A quantum circuit that is checked for equivalence with this circuit.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbcquantum.circuit.AssertQuantumCircuit.add_eq_circuit_use_param">
+<span class="sig-name descname"><span class="pre">add_eq_circuit_use_param</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">circuit_gen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">P</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">QuantumCircuit</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dbcquantum/circuit.html#AssertQuantumCircuit.add_eq_circuit_use_param"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbcquantum.circuit.AssertQuantumCircuit.add_eq_circuit_use_param" title="Link to this definition">¶</a></dt>
+<dd><p>Adds a generator that generates a circuit.
+The generated circuit is checked for equivalence with this circuit.
+The equivalence is checked by comparing the state vectors after running them.
+The global phases are ignored.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – The name (tag) of the circuit.
+This is displayed when an error occurs to identify which circuit is not equivalent.</p></li>
+<li><p><strong>circuit_gen</strong> (<em>Callable</em><em>[</em><em>[</em><em>P</em><em>]</em><em>, </em><em>QuantumCircuit</em><em>]</em>) – A function that generates a QuantumCircuit from the runtime parameter.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbcquantum.circuit.AssertQuantumCircuit.add_eq_circuits_gen">
+<span class="sig-name descname"><span class="pre">add_eq_circuits_gen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">circuit_gen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">P</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">QuantumCircuit</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dbcquantum/circuit.html#AssertQuantumCircuit.add_eq_circuits_gen"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbcquantum.circuit.AssertQuantumCircuit.add_eq_circuits_gen" title="Link to this definition">¶</a></dt>
+<dd><p>Adds a generator that generates a list of pairs consisting of a tag (name) and a circuit.
+The generated circuits are checked for equivalence with this circuit.
+The tag is displayed when an error occurs to identify which circuit is not equivalent.
+The equivalence is checked by comparing the state vectors after running them.
+The global phases are ignored.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>circuit_gen</strong> (<em>Callable</em><em>[</em><em>[</em><em>P</em><em>]</em><em>, </em><em>list</em><em>[</em><em>tuple</em><em>[</em><em>str</em><em>, </em><em>QuantumCircuit</em><em>]</em><em>]</em><em>]</em>) – A function that generates a list of pairs,
+each consisting of a tag and a QuantumCircuit, from the runtime parameter.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbcquantum.circuit.AssertQuantumCircuit.add_post_condition">
+<span class="sig-name descname"><span class="pre">add_post_condition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Statevector</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">focus_qubits</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dbcquantum/circuit.html#AssertQuantumCircuit.add_post_condition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbcquantum.circuit.AssertQuantumCircuit.add_post_condition" title="Link to this definition">¶</a></dt>
+<dd><p>Adds an assertion that is related only to the poststate of the circuit.
+The assertion is checked after the execution of the circuit,
+or before the execution when inverting the circuit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – The name (tag) of the assertion.
+This is displayed when an error occurs to identify which assertion is
+not established.</p></li>
+<li><p><strong>condition</strong> (<em>Callable</em><em>[</em><em>[</em><em>Statevector</em><em>]</em><em>, </em><em>bool</em><em>]</em>) – The body of the assertion. It takes the poststate of
+the circuit and returns a boolean value indicating
+whether the assertion is satisfied.</p></li>
+<li><p><strong>focus_qubits</strong> (<em>Iterable</em><em>[</em><em>QubitSpecifier</em><em>] </em><em>| </em><em>None</em><em>, </em><em>optional</em>) – The qubits that are related to the assertions.
+Only the statevector of the specified qubits is extracted and passed
+to the condition.
+If not specified, all qubits are considered. Defaults to None.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbcquantum.circuit.AssertQuantumCircuit.add_post_condition_use_param">
+<span class="sig-name descname"><span class="pre">add_post_condition_use_param</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Statevector</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">P</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">focus_qubits</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dbcquantum/circuit.html#AssertQuantumCircuit.add_post_condition_use_param"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbcquantum.circuit.AssertQuantumCircuit.add_post_condition_use_param" title="Link to this definition">¶</a></dt>
+<dd><p>Adds an assertion that is related only to the poststate of the circuit.
+The assertion can also use the runtime parameter.
+The assertion is checked after the execution of the circuit,
+or before the execution when inverting the circuit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – The name (tag) of the assertion.
+This is displayed when an error occurs to identify which assertion is
+not established.</p></li>
+<li><p><strong>condition</strong> (<em>Callable</em><em>[</em><em>[</em><em>Statevector</em><em>, </em><em>P</em><em>]</em><em>, </em><em>bool</em><em>]</em>) – The body of the assertion. It takes the poststate of the circuit
+and the runtime parameter, and returns a boolean value indicating
+whether the assertion is satisfied.</p></li>
+<li><p><strong>focus_qubits</strong> (<em>Iterable</em><em>[</em><em>QubitSpecifier</em><em>] </em><em>| </em><em>None</em><em>, </em><em>optional</em>) – The qubits that are related to the assertions.
+Only the statevector of the specified qubits is extracted and passed
+to the condition.
+If not specified, all qubits are considered. Defaults to None.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbcquantum.circuit.AssertQuantumCircuit.add_post_conditions_gen">
+<span class="sig-name descname"><span class="pre">add_post_conditions_gen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">conditions_gen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">P</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Statevector</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dbcquantum/circuit.html#AssertQuantumCircuit.add_post_conditions_gen"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbcquantum.circuit.AssertQuantumCircuit.add_post_conditions_gen" title="Link to this definition">¶</a></dt>
+<dd><p>Adds a generator that generates assertions from the runtime parameter.
+The assertions here are related to only the poststate of the circuit.
+Each assertion is a tuple where the first element is a tag (name) of the assertion
+and the second element is the body of the assertion.
+The tag is displayed when an error occurs to identify which assertion is not established.
+The body of the assertion is a function that takes a Statevector instance (representing
+the poststate of the circuit) and returns a boolean indicating whether the assertion
+is satisfied.
+The assertions are checked after the execution of the circuit,
+or before the execution when inverting the circuit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>conditions_gen</strong> (<em>Callable</em><em>[</em><em>[</em><em>P</em><em>]</em><em>, </em><em>list</em><em>[</em><em>tuple</em><em>[</em><em>str</em><em>, </em><em>Callable</em><em>[</em><em>[</em><em>Statevector</em><em>]</em><em>, </em><em>bool</em><em>]</em><em>]</em><em>]</em><em>]</em>) – A function that generates a list of assertions from the runtime parameter.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbcquantum.circuit.AssertQuantumCircuit.add_pre_condition">
+<span class="sig-name descname"><span class="pre">add_pre_condition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Statevector</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">focus_qubits</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dbcquantum/circuit.html#AssertQuantumCircuit.add_pre_condition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbcquantum.circuit.AssertQuantumCircuit.add_pre_condition" title="Link to this definition">¶</a></dt>
+<dd><p>Adds an assertion that is related only to the prestate of the circuit.
+The assertion is checked before the execution of the circuit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – The name (tag) of the assertion.
+This is displayed when an error occurs to identify which assertion is
+not established.</p></li>
+<li><p><strong>condition</strong> (<em>Callable</em><em>[</em><em>[</em><em>Statevector</em><em>]</em><em>, </em><em>bool</em><em>]</em>) – The body of the assertion. It takes the prestate of
+the circuit and returns a boolean value indicating
+whether the assertion is satisfied.</p></li>
+<li><p><strong>focus_qubits</strong> (<em>Iterable</em><em>[</em><em>QubitSpecifier</em><em>] </em><em>| </em><em>None</em><em>, </em><em>optional</em>) – The qubits that are related to the assertions.
+Only the statevector of the specified qubits is extracted and passed
+to the condition.
+If not specified, all qubits are considered. Defaults to None.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbcquantum.circuit.AssertQuantumCircuit.add_pre_condition_use_param">
+<span class="sig-name descname"><span class="pre">add_pre_condition_use_param</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Statevector</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">P</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">focus_qubits</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dbcquantum/circuit.html#AssertQuantumCircuit.add_pre_condition_use_param"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbcquantum.circuit.AssertQuantumCircuit.add_pre_condition_use_param" title="Link to this definition">¶</a></dt>
+<dd><p>Adds an assertion that is related only to the prestate of the circuit.
+The assertion can also use the runtime parameter.
+The assertion is checked before the execution of the circuit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – The name (tag) of the assertion.
+This is displayed when an error occurs to identify which assertion is
+not established.</p></li>
+<li><p><strong>condition</strong> (<em>Callable</em><em>[</em><em>[</em><em>Statevector</em><em>, </em><em>P</em><em>]</em><em>, </em><em>bool</em><em>]</em>) – The body of the assertion. It takes the prestate of the circuit
+and the runtime parameter, and returns a boolean value indicating
+whether the assertion is satisfied.</p></li>
+<li><p><strong>focus_qubits</strong> (<em>Iterable</em><em>[</em><em>QubitSpecifier</em><em>] </em><em>| </em><em>None</em><em>, </em><em>optional</em>) – The qubits that are related to the assertions.
+Only the statevector of the specified qubits is extracted and passed
+to the condition.
+If not specified, all qubits are considered. Defaults to None.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbcquantum.circuit.AssertQuantumCircuit.add_pre_conditions_gen">
+<span class="sig-name descname"><span class="pre">add_pre_conditions_gen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">conditions_gen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">P</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Statevector</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dbcquantum/circuit.html#AssertQuantumCircuit.add_pre_conditions_gen"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbcquantum.circuit.AssertQuantumCircuit.add_pre_conditions_gen" title="Link to this definition">¶</a></dt>
+<dd><p>Adds a generator that generates assertions from the runtime parameter.
+The assertions here are related to only the prestate of the circuit.
+Each assertion is a tuple where the first element is a tag (name) of the assertion
+and the second element is the body of the assertion.
+The tag is displayed when an error occurs to identify which assertion is not established.
+The body of the assertion is a function that takes a Statevector instance (representing
+the prestate of the circuit) and returns a boolean indicating whether the assertion
+is satisfied.
+The assertions are checked before the execution of the circuit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>conditions_gen</strong> (<em>Callable</em><em>[</em><em>[</em><em>P</em><em>]</em><em>, </em><em>list</em><em>[</em><em>tuple</em><em>[</em><em>str</em><em>, </em><em>Callable</em><em>[</em><em>[</em><em>Statevector</em><em>]</em><em>, </em><em>bool</em><em>]</em><em>]</em><em>]</em><em>]</em>) – A function that generates a list of assertions from the runtime parameter.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbcquantum.circuit.AssertQuantumCircuit.append">
+<span class="sig-name descname"><span class="pre">append</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instruction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit" title="dbcquantum.circuit.AssertQuantumCircuit"><span class="pre">AssertQuantumCircuit</span></a><span class="p"><span class="pre">[</span></span><span class="pre">P</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Instruction</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">QuantumCircuit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/dbcquantum/circuit.html#AssertQuantumCircuit.append"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbcquantum.circuit.AssertQuantumCircuit.append" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">append</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instruction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit" title="dbcquantum.circuit.AssertQuantumCircuit"><span class="pre">AssertQuantumCircuit</span></a><span class="p"><span class="pre">[</span></span><span class="pre">Q</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param_converter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">P</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Q</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span></dt>
+<dd><p>Appends an instruction to the end of the circuit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>instruction</strong> (<a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit" title="dbcquantum.circuit.AssertQuantumCircuit"><em>AssertQuantumCircuit</em></a><em>[</em><em>Q</em><em>] </em><em>| </em><em>Instruction</em><em> | </em><em>QuantumCircuit</em>) – The instruction to be added.
+It can be an AssertQuantumCircuit, a quantum gate, or a quantum circuit.</p></li>
+<li><p><strong>qargs</strong> (<em>Iterable</em><em>[</em><em>QubitSpecifier</em><em>]</em>) – The qubits that the instruction ranges over.</p></li>
+<li><p><strong>param_converter</strong> (<em>Callable</em><em>[</em><em>[</em><em>P</em><em>]</em><em>, </em><em>Q</em><em>] </em><em>| </em><em>None</em><em>, </em><em>optional</em>) – A funtion that converts the runtime parameter for this circuit
+to the parameter for the appended component circuit.
+If not provided, it defaults to the identity function.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbcquantum.circuit.AssertQuantumCircuit.append_superposition">
+<span class="sig-name descname"><span class="pre">append_superposition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aqc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit" title="dbcquantum.circuit.AssertQuantumCircuit"><span class="pre">AssertQuantumCircuit</span></a><span class="p"><span class="pre">[</span></span><span class="pre">P</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pre_superposition_states</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">complex</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">S1</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">post_superposition_states</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">complex</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">S2</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param_converter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">P</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">P</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dbcquantum/circuit.html#AssertQuantumCircuit.append_superposition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbcquantum.circuit.AssertQuantumCircuit.append_superposition" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">append_superposition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aqc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit" title="dbcquantum.circuit.AssertQuantumCircuit"><span class="pre">AssertQuantumCircuit</span></a><span class="p"><span class="pre">[</span></span><span class="pre">Q</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pre_superposition_states</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">complex</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">S1</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">post_superposition_states</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">complex</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">S2</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param_converter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">P</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">Q</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Appends an AssertQuantumCircuit to the end of the quantum circuit.
+This method is designed to use quantum circuits in a superposition state,
+enabling the reuse of assertions that are typically valid only for non-superposition states.
+The input state is decomposed according to a user-specified method,
+and the circuit is executed for each decomposed state separately.
+This approach allows for the reuse of assertions within the circuit.
+The final state is derived by combining all the results from the decomposed states.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – The name (tag) associated with the decomposition.
+This tag is displayed when an error occurs during the decomposition
+process using the user-specified method.</p></li>
+<li><p><strong>aqc</strong> (<a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit" title="dbcquantum.circuit.AssertQuantumCircuit"><em>AssertQuantumCircuit</em></a><em>[</em><em>Q</em><em>]</em>) – The instruction to be added.</p></li>
+<li><p><strong>qargs</strong> (<em>Iterable</em><em>[</em><em>QubitSpecifier</em><em>]</em>) – The qubits that the instruction ranges over.</p></li>
+<li><p><strong>pre_superposition_states</strong> (<em>Iterable</em><em>[</em><em>tuple</em><em>[</em><em>complex</em><em>, </em><em>S1</em><em>]</em><em>] </em><em>| </em><em>None</em><em>, </em><em>optional</em>) – A list of decomposed pre-states along with their amplitudes.
+If not provided, the decomposition will be skipped.</p></li>
+<li><p><strong>post_superposition_states</strong> (<em>Iterable</em><em>[</em><em>tuple</em><em>[</em><em>complex</em><em>, </em><em>S2</em><em>]</em><em>] </em><em>| </em><em>None</em><em>, </em><em>optional</em>) – A list of decomposed post-states along with their amplitudes.
+This list is used to verify whether each post state is as expected.
+If not provided, the verification will be skipped.</p></li>
+<li><p><strong>param_converter</strong> (<em>Callable</em><em>[</em><em>[</em><em>P</em><em>]</em><em>, </em><em>list</em><em>[</em><em>Q</em><em>]</em><em>] </em><em>| </em><em>None</em><em>, </em><em>optional</em>) – A function that converts the runtime parameter for this circuit
+into a parameter for the appended component circuit.
+The elements of the list will be distributed to each decomposed state.
+If not provided, it defaults to the identity function.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbcquantum.circuit.AssertQuantumCircuit.append_superposition_basis">
+<span class="sig-name descname"><span class="pre">append_superposition_basis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aqc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit" title="dbcquantum.circuit.AssertQuantumCircuit"><span class="pre">AssertQuantumCircuit</span></a><span class="p"><span class="pre">[</span></span><span class="pre">P</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pre_state_basis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">S1</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">post_state_basis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">S2</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param_converter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">P</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">P</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">focus_qubits</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dbcquantum/circuit.html#AssertQuantumCircuit.append_superposition_basis"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbcquantum.circuit.AssertQuantumCircuit.append_superposition_basis" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">append_superposition_basis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aqc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit" title="dbcquantum.circuit.AssertQuantumCircuit"><span class="pre">AssertQuantumCircuit</span></a><span class="p"><span class="pre">[</span></span><span class="pre">Q</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pre_state_basis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">S1</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">post_state_basis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">S2</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param_converter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">P</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">Q</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">focus_qubits</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Appends an AssertQuantumCircuit to the end of the quantum circuit.
+This method is designed to use quantum circuits in a superposition state,
+enabling the reuse of assertions that are typically valid only for non-superposition states.
+The input state is decomposed according to a user-specified method,
+and the circuit is executed for each decomposed state separately.
+This approach allows for the reuse of assertions within the circuit.
+The final state is derived by combining all the results from the decomposed states.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – The name (tag) associated with the decomposition.
+This tag is displayed when an error occurs during the decomposition
+process using the user-specified method.</p></li>
+<li><p><strong>aqc</strong> (<a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit" title="dbcquantum.circuit.AssertQuantumCircuit"><em>AssertQuantumCircuit</em></a><em>[</em><em>Q</em><em>]</em>) – The instruction to be added.</p></li>
+<li><p><strong>qargs</strong> (<em>Iterable</em><em>[</em><em>QubitSpecifier</em><em>]</em>) – The qubits that the instruction ranges over.</p></li>
+<li><p><strong>pre_state_basis</strong> (<em>Iterable</em><em>[</em><em>S1</em><em>] </em><em>| </em><em>None</em><em>, </em><em>optional</em>) – A list of decomposed pre-states.
+The elements of this list should be linearly independent.
+The amplitudes will be calculated automatically.
+If not provided, the decomposition will be skipped.</p></li>
+<li><p><strong>post_state_basis</strong> (<em>Iterable</em><em>[</em><em>S2</em><em>] </em><em>| </em><em>None</em><em>, </em><em>optional</em>) – A list of decomposed post-states.
+This list is used to verify whether each post state is as expected.
+The elements of this list should be linearly independent.
+The amplitudes will be calculated automatically.
+If not provided, the verification will be skipped.</p></li>
+<li><p><strong>param_converter</strong> (<em>Callable</em><em>[</em><em>[</em><em>P</em><em>]</em><em>, </em><em>list</em><em>[</em><em>Q</em><em>]</em><em>] </em><em>| </em><em>None</em><em>, </em><em>optional</em>) – A function that converts the runtime parameter for this circuit
+into a parameter for the appended component circuit.
+The elements of the list will be distributed to each decomposed state.
+If not provided, it defaults to the identity function.</p></li>
+<li><p><strong>focus_qubits</strong> (<em>Iterable</em><em>[</em><em>QubitSpecifier</em><em>] </em><em>| </em><em>None</em><em>, </em><em>optional</em>) – The qubits that are in superposition states.
+If not specified, all qubits are considered. Defaults to None.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbcquantum.circuit.AssertQuantumCircuit.append_superposition_basis_from_param">
+<span class="sig-name descname"><span class="pre">append_superposition_basis_from_param</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aqc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit" title="dbcquantum.circuit.AssertQuantumCircuit"><span class="pre">AssertQuantumCircuit</span></a><span class="p"><span class="pre">[</span></span><span class="pre">P</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pre_state_basis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">P</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">S1</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">post_state_basis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">P</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">S2</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param_converter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">P</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">P</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">focus_qubits</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dbcquantum/circuit.html#AssertQuantumCircuit.append_superposition_basis_from_param"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbcquantum.circuit.AssertQuantumCircuit.append_superposition_basis_from_param" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">append_superposition_basis_from_param</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aqc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit" title="dbcquantum.circuit.AssertQuantumCircuit"><span class="pre">AssertQuantumCircuit</span></a><span class="p"><span class="pre">[</span></span><span class="pre">Q</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pre_state_basis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">P</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">S1</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">post_state_basis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">P</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">S2</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param_converter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">P</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">Q</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">focus_qubits</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Appends an AssertQuantumCircuit to the end of the quantum circuit.
+This method is designed to use quantum circuits in a superposition state,
+enabling the reuse of assertions that are typically valid only for non-superposition states.
+The input state is decomposed according to a user-specified method,
+and the circuit is executed for each decomposed state separately.
+This approach allows for the reuse of assertions within the circuit.
+The final state is derived by combining all the results from the decomposed states.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – The name (tag) associated with the decomposition.
+This tag is displayed when an error occurs during the decomposition
+process using the user-specified method.</p></li>
+<li><p><strong>aqc</strong> (<a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit" title="dbcquantum.circuit.AssertQuantumCircuit"><em>AssertQuantumCircuit</em></a><em>[</em><em>Q</em><em>]</em>) – The instruction to be added.</p></li>
+<li><p><strong>qargs</strong> (<em>Iterable</em><em>[</em><em>QubitSpecifier</em><em>]</em>) – The qubits that the instruction ranges over.</p></li>
+<li><p><strong>pre_state_basis</strong> (<em>Callable</em><em>[</em><em>[</em><em>P</em><em>]</em><em>, </em><em>list</em><em>[</em><em>S1</em><em>]</em><em>] </em><em>| </em><em>None</em><em>, </em><em>optional</em>) – A function that generates the list of decomposed pre-states from the runtime
+parameter.
+The elements of this list should be linearly independent.
+The amplitudes will be calculated automatically.
+If not provided, the decomposition will be skipped.</p></li>
+<li><p><strong>post_state_basis</strong> (<em>Callable</em><em>[</em><em>[</em><em>P</em><em>]</em><em>, </em><em>list</em><em>[</em><em>S2</em><em>]</em><em>] </em><em>| </em><em>None</em><em>, </em><em>optional</em>) – A function that generates the list of decomposed post-states from the runtime
+parameter.
+This list is used to verify whether each post state is as expected.
+The elements of this list should be linearly independent.
+The amplitudes will be calculated automatically.
+If not provided, the verification will be skipped.</p></li>
+<li><p><strong>param_converter</strong> (<em>Callable</em><em>[</em><em>[</em><em>P</em><em>]</em><em>, </em><em>list</em><em>[</em><em>Q</em><em>]</em><em>] </em><em>| </em><em>None</em><em>, </em><em>optional</em>) – A function that converts the runtime parameter for this circuit
+into a parameter for the appended component circuit.
+The elements of the list will be distributed to each decomposed state.
+If not provided, it defaults to the identity function.</p></li>
+<li><p><strong>focus_qubits</strong> (<em>Iterable</em><em>[</em><em>QubitSpecifier</em><em>] </em><em>| </em><em>None</em><em>, </em><em>optional</em>) – The qubits that are in superposition states.
+If not specified, all qubits are considered. Defaults to None.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbcquantum.circuit.AssertQuantumCircuit.append_superposition_gen">
+<span class="sig-name descname"><span class="pre">append_superposition_gen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aqc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit" title="dbcquantum.circuit.AssertQuantumCircuit"><span class="pre">AssertQuantumCircuit</span></a><span class="p"><span class="pre">[</span></span><span class="pre">P</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pre_superposition_states_gen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Statevector</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">P</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">complex</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">S1</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">post_superposition_states_gen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Statevector</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">P</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">complex</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">S2</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param_converter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">P</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">P</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dbcquantum/circuit.html#AssertQuantumCircuit.append_superposition_gen"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbcquantum.circuit.AssertQuantumCircuit.append_superposition_gen" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">append_superposition_gen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aqc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit" title="dbcquantum.circuit.AssertQuantumCircuit"><span class="pre">AssertQuantumCircuit</span></a><span class="p"><span class="pre">[</span></span><span class="pre">Q</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pre_superposition_states_gen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Statevector</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">P</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">complex</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">S1</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">post_superposition_states_gen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Statevector</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">P</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">complex</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">S2</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param_converter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">P</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">Q</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Appends an AssertQuantumCircuit to the end of the quantum circuit.
+This method is designed to use quantum circuits in a superposition state,
+enabling the reuse of assertions that are typically valid only for non-superposition states.
+The input state is decomposed according to a user-specified method,
+and the circuit is executed for each decomposed state separately.
+This approach allows for the reuse of assertions within the circuit.
+The final state is derived by combining all the results from the decomposed states.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – The name (tag) associated with the decomposition.
+This tag is displayed when an error occurs during the decomposition
+process using the user-specified method.</p></li>
+<li><p><strong>aqc</strong> (<a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit" title="dbcquantum.circuit.AssertQuantumCircuit"><em>AssertQuantumCircuit</em></a><em>[</em><em>Q</em><em>]</em>) – The instruction to be added.</p></li>
+<li><p><strong>qargs</strong> (<em>Iterable</em><em>[</em><em>QubitSpecifier</em><em>]</em>) – The qubits that the instruction ranges over.</p></li>
+<li><p><strong>pre_superposition_states_gen</strong> – (Callable[[Statevector, P], list[tuple[complex, S1]]]  |  None, optional):
+A function that generates a list of decomposed pre-states along with their
+amplitudes from the pre-state and runtime parameter.
+If not provided, it defaults to “lambda s p: [(1, s)]”.</p></li>
+<li><p><strong>post_superposition_states_gen</strong> – (Callable[[Statevector, P], list[tuple[complex, S2]]]  |  None, optional):
+A function that generates a list of decomposed post-states along with their
+amplitudes from the post-state and runtime parameter.
+This function is used to verify whether each post state is as expected.
+If not provided, the verification will be skipped.</p></li>
+<li><p><strong>param_converter</strong> (<em>Callable</em><em>[</em><em>[</em><em>P</em><em>]</em><em>, </em><em>list</em><em>[</em><em>Q</em><em>]</em><em>] </em><em>| </em><em>None</em><em>, </em><em>optional</em>) – A function that converts the runtime parameter for this circuit
+into a parameter for the appended component circuit.
+The elements of the list will be distributed to each decomposed state.
+If not provided, it defaults to the identity function.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbcquantum.circuit.AssertQuantumCircuit.barrier">
+<span class="sig-name descname"><span class="pre">barrier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dbcquantum/circuit.html#AssertQuantumCircuit.barrier"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbcquantum.circuit.AssertQuantumCircuit.barrier" title="Link to this definition">¶</a></dt>
+<dd><p>Appends a barrier to the quantum circuit for separating it into parts.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>qargs</strong> (<em>QubitSpecifier</em><em> | </em><em>Iterable</em><em>[</em><em>QubitSpecifier</em><em>] </em><em>| </em><em>None</em><em>, </em><em>optional</em>) – The qubits that the instruction ranges over.
+If omitted, it is set to all the qubits.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbcquantum.circuit.AssertQuantumCircuit.ccx">
+<span class="sig-name descname"><span class="pre">ccx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">control_qubit1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">control_qubit2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_qubit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ctrl_state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dbcquantum/circuit.html#AssertQuantumCircuit.ccx"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbcquantum.circuit.AssertQuantumCircuit.ccx" title="Link to this definition">¶</a></dt>
+<dd><p>Appends a CCX gate to the circuit.
+For more details, refer to the Qiskit documentation:
+<a class="reference external" href="https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit">https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>control_qubit1</strong> (<em>QubitSpecifier</em>) – The first control qubit.</p></li>
+<li><p><strong>control_qubit2</strong> (<em>QubitSpecifier</em>) – The second control qubit.</p></li>
+<li><p><strong>target_qubit</strong> (<em>QubitSpecifier</em>) – The target qubit.</p></li>
+<li><p><strong>ctrl_state</strong> (<em>str</em><em> | </em><em>int</em><em> | </em><em>None</em><em>, </em><em>optional</em>) – The control state. Defaults to None.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbcquantum.circuit.AssertQuantumCircuit.copy">
+<span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit" title="dbcquantum.circuit.AssertQuantumCircuit"><span class="pre">AssertQuantumCircuit</span></a><span class="p"><span class="pre">[</span></span><span class="pre">P</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/dbcquantum/circuit.html#AssertQuantumCircuit.copy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbcquantum.circuit.AssertQuantumCircuit.copy" title="Link to this definition">¶</a></dt>
+<dd><p>Creates a copy of the quantum circuit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A copy of the existing quantum circuit.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit" title="dbcquantum.circuit.AssertQuantumCircuit">AssertQuantumCircuit</a>[P]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbcquantum.circuit.AssertQuantumCircuit.cp">
+<span class="sig-name descname"><span class="pre">cp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">theta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ParameterExpression</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">control_qubit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_qubit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ctrl_state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dbcquantum/circuit.html#AssertQuantumCircuit.cp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbcquantum.circuit.AssertQuantumCircuit.cp" title="Link to this definition">¶</a></dt>
+<dd><p>Appends a CP (Controlled-Phase) gate to the circuit.
+For more details, refer to the Qiskit documentation:
+<a class="reference external" href="https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit">https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>theta</strong> (<em>ParameterValueType</em>) – The phase angle.</p></li>
+<li><p><strong>control_qubit</strong> (<em>QubitSpecifier</em>) – The control qubit.</p></li>
+<li><p><strong>target_qubit</strong> (<em>QubitSpecifier</em>) – The target qubit.</p></li>
+<li><p><strong>ctrl_state</strong> (<em>str</em><em> | </em><em>int</em><em> | </em><em>None</em><em>, </em><em>optional</em>) – The control state. Defaults to None.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbcquantum.circuit.AssertQuantumCircuit.cx">
+<span class="sig-name descname"><span class="pre">cx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">control_qubit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_qubit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ctrl_state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dbcquantum/circuit.html#AssertQuantumCircuit.cx"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbcquantum.circuit.AssertQuantumCircuit.cx" title="Link to this definition">¶</a></dt>
+<dd><p>Appends a CX gate to the circuit.
+For more details, refer to the Qiskit documentation:
+<a class="reference external" href="https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit">https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>control_qubit</strong> (<em>QubitSpecifier</em>) – The control qubit.</p></li>
+<li><p><strong>target_qubit</strong> (<em>QubitSpecifier</em>) – The target qubit.</p></li>
+<li><p><strong>ctrl_state</strong> (<em>str</em><em> | </em><em>int</em><em> | </em><em>None</em><em>, </em><em>optional</em>) – The control state. Defaults to None.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbcquantum.circuit.AssertQuantumCircuit.h">
+<span class="sig-name descname"><span class="pre">h</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qubit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dbcquantum/circuit.html#AssertQuantumCircuit.h"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbcquantum.circuit.AssertQuantumCircuit.h" title="Link to this definition">¶</a></dt>
+<dd><p>Appends a H (Hadamard) gate to the circuit.
+For more details, refer to the Qiskit documentation:
+<a class="reference external" href="https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit">https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>qubit</strong> (<em>QubitSpecifier</em>) – The qubit to which the gate will be applied.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbcquantum.circuit.AssertQuantumCircuit.i">
+<span class="sig-name descname"><span class="pre">i</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qubit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dbcquantum/circuit.html#AssertQuantumCircuit.i"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbcquantum.circuit.AssertQuantumCircuit.i" title="Link to this definition">¶</a></dt>
+<dd><p>Appends an I (Identity) gate to the circuit.
+For more details, refer to the Qiskit documentation:
+<a class="reference external" href="https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit">https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>qubit</strong> (<em>QubitSpecifier</em>) – The qubit to which the gate will be applied.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbcquantum.circuit.AssertQuantumCircuit.inverse">
+<span class="sig-name descname"><span class="pre">inverse</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit" title="dbcquantum.circuit.AssertQuantumCircuit"><span class="pre">AssertQuantumCircuit</span></a><span class="p"><span class="pre">[</span></span><span class="pre">P</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/dbcquantum/circuit.html#AssertQuantumCircuit.inverse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbcquantum.circuit.AssertQuantumCircuit.inverse" title="Link to this definition">¶</a></dt>
+<dd><p>Calculates the inverted quantum circuit.
+It is obtained by reversing the order of the instructions,
+inverting quantum gates, and inverting the assertions.
+The pre and post conditions are swapped.
+In addition, the pre and post states will be swapped
+when passing them to the conditions that are related to both pre and post conditions.
+This method inverts a copy of the circuit, so it does not affect the original circuit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The inverted quantum circuit.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit" title="dbcquantum.circuit.AssertQuantumCircuit">AssertQuantumCircuit</a>[P]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dbcquantum.circuit.AssertQuantumCircuit.num_qubits">
+<span class="sig-name descname"><span class="pre">num_qubits</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#dbcquantum.circuit.AssertQuantumCircuit.num_qubits" title="Link to this definition">¶</a></dt>
+<dd><p>The number of qubits in the quantum circuit.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbcquantum.circuit.AssertQuantumCircuit.p">
+<span class="sig-name descname"><span class="pre">p</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">theta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ParameterExpression</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qubit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dbcquantum/circuit.html#AssertQuantumCircuit.p"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbcquantum.circuit.AssertQuantumCircuit.p" title="Link to this definition">¶</a></dt>
+<dd><p>Appends a P (Phase) gate to the circuit.
+For more details, refer to the Qiskit documentation:
+<a class="reference external" href="https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit">https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>theta</strong> (<em>ParameterValueType</em>) – The phase angle.</p></li>
+<li><p><strong>qubit</strong> (<em>QubitSpecifier</em>) – The qubit to which the gate will be applied.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbcquantum.circuit.AssertQuantumCircuit.remove_assertions">
+<span class="sig-name descname"><span class="pre">remove_assertions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">QuantumCircuit</span></span></span><a class="reference internal" href="../_modules/dbcquantum/circuit.html#AssertQuantumCircuit.remove_assertions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbcquantum.circuit.AssertQuantumCircuit.remove_assertions" title="Link to this definition">¶</a></dt>
+<dd><p>Removes all assertions and returns a QuantumCircuit that is written in Qiskit.
+You can run it on an actual quantum computer by Qiskit
+without providing the runtime parameters for the assertions.
+This method removes assertions from a copy of the circuit,
+so it does not affect the original circuit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The assertion-less quantum circuit.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>QuantumCircuit</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbcquantum.circuit.AssertQuantumCircuit.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">init_state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Statevector</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">OperatorBase</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">complex</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Statevector</span></span></span><a class="reference internal" href="../_modules/dbcquantum/circuit.html#AssertQuantumCircuit.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbcquantum.circuit.AssertQuantumCircuit.run" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">init_state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Statevector</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">OperatorBase</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">complex</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">P</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Statevector</span></span></span></dt>
+<dd><p>Executes the quantum circuit while checking assertions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>init_state</strong> – (Statevector  |  OperatorBase  |  list[complex]  |  np.ndarray  |  None, optional):
+The initial state to run the circuit.
+If omitted, it is set to 0 … 0.</p></li>
+<li><p><strong>param</strong> (<em>P</em><em> | </em><em>None</em><em>, </em><em>optional</em>) – The runtime parameter for the assertions.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The final state after running the circuit.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Statevector</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbcquantum.circuit.AssertQuantumCircuit.run_without_assertion">
+<span class="sig-name descname"><span class="pre">run_without_assertion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">init_state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Statevector</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">OperatorBase</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">complex</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Statevector</span></span></span><a class="reference internal" href="../_modules/dbcquantum/circuit.html#AssertQuantumCircuit.run_without_assertion"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbcquantum.circuit.AssertQuantumCircuit.run_without_assertion" title="Link to this definition">¶</a></dt>
+<dd><p>Executes the quantum circuit without checking the assertions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>init_state</strong> – (Statevector  |  OperatorBase  |  list[complex]  |  np.ndarray  |  None, optional):
+The initial state to run the circuit.
+If omitted, it is set to 0 … 0.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The final state after running the circuit.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Statevector</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbcquantum.circuit.AssertQuantumCircuit.rx">
+<span class="sig-name descname"><span class="pre">rx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">theta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ParameterExpression</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qubit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dbcquantum/circuit.html#AssertQuantumCircuit.rx"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbcquantum.circuit.AssertQuantumCircuit.rx" title="Link to this definition">¶</a></dt>
+<dd><p>Appends an RX gate to the circuit.
+For more details, refer to the Qiskit documentation:
+<a class="reference external" href="https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit">https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>theta</strong> (<em>ParameterValueType</em>) – The rotation angle.</p></li>
+<li><p><strong>qubit</strong> (<em>QubitSpecifier</em>) – The qubit to which the gate will be applied.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbcquantum.circuit.AssertQuantumCircuit.ry">
+<span class="sig-name descname"><span class="pre">ry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">theta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ParameterExpression</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qubit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dbcquantum/circuit.html#AssertQuantumCircuit.ry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbcquantum.circuit.AssertQuantumCircuit.ry" title="Link to this definition">¶</a></dt>
+<dd><p>Appends an RY gate to the circuit.
+For more details, refer to the Qiskit documentation:
+<a class="reference external" href="https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit">https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>theta</strong> (<em>ParameterValueType</em>) – The rotation angle.</p></li>
+<li><p><strong>qubit</strong> (<em>QubitSpecifier</em>) – The qubit to which the gate will be applied.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbcquantum.circuit.AssertQuantumCircuit.rz">
+<span class="sig-name descname"><span class="pre">rz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phi</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ParameterExpression</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qubit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dbcquantum/circuit.html#AssertQuantumCircuit.rz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbcquantum.circuit.AssertQuantumCircuit.rz" title="Link to this definition">¶</a></dt>
+<dd><p>Appends an RX gate to the circuit.
+For more details, refer to the Qiskit documentation:
+<a class="reference external" href="https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit">https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>phi</strong> (<em>ParameterValueType</em>) – The rotation angle.</p></li>
+<li><p><strong>qubit</strong> (<em>QubitSpecifier</em>) – The qubit to which the gate will be applied.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbcquantum.circuit.AssertQuantumCircuit.rzx">
+<span class="sig-name descname"><span class="pre">rzx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">theta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ParameterExpression</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qubit1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qubit2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dbcquantum/circuit.html#AssertQuantumCircuit.rzx"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbcquantum.circuit.AssertQuantumCircuit.rzx" title="Link to this definition">¶</a></dt>
+<dd><p>Appends an RZX gate to the circuit.
+For more details, refer to the Qiskit documentation:
+<a class="reference external" href="https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit">https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>theta</strong> (<em>ParameterValueType</em>) – The rotation angle.</p></li>
+<li><p><strong>qubit1</strong> (<em>QubitSpecifier</em>) – The first qubit to which the gate will be applied.</p></li>
+<li><p><strong>qubit2</strong> (<em>QubitSpecifier</em>) – The second qubit to which the gate will be applied.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbcquantum.circuit.AssertQuantumCircuit.s">
+<span class="sig-name descname"><span class="pre">s</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qubit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dbcquantum/circuit.html#AssertQuantumCircuit.s"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbcquantum.circuit.AssertQuantumCircuit.s" title="Link to this definition">¶</a></dt>
+<dd><p>Appends a S gate to the circuit.
+For more details, refer to the Qiskit documentation:
+<a class="reference external" href="https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit">https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>qubit</strong> (<em>QubitSpecifier</em>) – The qubit to which the gate will be applied.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbcquantum.circuit.AssertQuantumCircuit.sdg">
+<span class="sig-name descname"><span class="pre">sdg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qubit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dbcquantum/circuit.html#AssertQuantumCircuit.sdg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbcquantum.circuit.AssertQuantumCircuit.sdg" title="Link to this definition">¶</a></dt>
+<dd><p>Appends a Sdg gate to the circuit.
+For more details, refer to the Qiskit documentation:
+<a class="reference external" href="https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit">https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>qubit</strong> (<em>QubitSpecifier</em>) – The qubit to which the gate will be applied.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbcquantum.circuit.AssertQuantumCircuit.swap">
+<span class="sig-name descname"><span class="pre">swap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qubit1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qubit2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dbcquantum/circuit.html#AssertQuantumCircuit.swap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbcquantum.circuit.AssertQuantumCircuit.swap" title="Link to this definition">¶</a></dt>
+<dd><p>Appends a Swap gate to the circuit.
+For more details, refer to the Qiskit documentation:
+<a class="reference external" href="https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit">https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>qubit1</strong> (<em>QubitSpecifier</em>) – The first qubit to which the gate will be applied.</p></li>
+<li><p><strong>qubit2</strong> (<em>QubitSpecifier</em>) – The second qubit to which the gate will be applied.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbcquantum.circuit.AssertQuantumCircuit.sx">
+<span class="sig-name descname"><span class="pre">sx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qubit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dbcquantum/circuit.html#AssertQuantumCircuit.sx"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbcquantum.circuit.AssertQuantumCircuit.sx" title="Link to this definition">¶</a></dt>
+<dd><p>Appends a SX gate to the circuit.
+For more details, refer to the Qiskit documentation:
+<a class="reference external" href="https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit">https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>qubit</strong> (<em>QubitSpecifier</em>) – The qubit to which the gate will be applied.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbcquantum.circuit.AssertQuantumCircuit.sxdg">
+<span class="sig-name descname"><span class="pre">sxdg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qubit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dbcquantum/circuit.html#AssertQuantumCircuit.sxdg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbcquantum.circuit.AssertQuantumCircuit.sxdg" title="Link to this definition">¶</a></dt>
+<dd><p>Appends a SXdg gate to the circuit.
+For more details, refer to the Qiskit documentation:
+<a class="reference external" href="https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit">https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>qubit</strong> (<em>QubitSpecifier</em>) – The qubit to which the gate will be applied.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbcquantum.circuit.AssertQuantumCircuit.t">
+<span class="sig-name descname"><span class="pre">t</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qubit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dbcquantum/circuit.html#AssertQuantumCircuit.t"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbcquantum.circuit.AssertQuantumCircuit.t" title="Link to this definition">¶</a></dt>
+<dd><p>Appends a T gate to the circuit.
+For more details, refer to the Qiskit documentation:
+<a class="reference external" href="https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit">https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>qubit</strong> (<em>QubitSpecifier</em>) – The qubit to which the gate will be applied.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbcquantum.circuit.AssertQuantumCircuit.tdg">
+<span class="sig-name descname"><span class="pre">tdg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qubit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dbcquantum/circuit.html#AssertQuantumCircuit.tdg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbcquantum.circuit.AssertQuantumCircuit.tdg" title="Link to this definition">¶</a></dt>
+<dd><p>Appends a Tdg gate to the circuit.
+For more details, refer to the Qiskit documentation:
+<a class="reference external" href="https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit">https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>qubit</strong> (<em>QubitSpecifier</em>) – The qubit to which the gate will be applied.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbcquantum.circuit.AssertQuantumCircuit.toffoli">
+<span class="sig-name descname"><span class="pre">toffoli</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">control_qubit1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">control_qubit2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_qubit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dbcquantum/circuit.html#AssertQuantumCircuit.toffoli"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbcquantum.circuit.AssertQuantumCircuit.toffoli" title="Link to this definition">¶</a></dt>
+<dd><p>Appends a toffoli gate to the circuit.
+For more details, refer to the Qiskit documentation:
+<a class="reference external" href="https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit">https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>control_qubit1</strong> (<em>QubitSpecifier</em>) – The first control qubit.</p></li>
+<li><p><strong>control_qubit2</strong> (<em>QubitSpecifier</em>) – The second control qubit.</p></li>
+<li><p><strong>target_qubit</strong> (<em>QubitSpecifier</em>) – The target qubit.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbcquantum.circuit.AssertQuantumCircuit.u">
+<span class="sig-name descname"><span class="pre">u</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">theta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ParameterExpression</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ParameterExpression</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lam</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ParameterExpression</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qubit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dbcquantum/circuit.html#AssertQuantumCircuit.u"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbcquantum.circuit.AssertQuantumCircuit.u" title="Link to this definition">¶</a></dt>
+<dd><p>Appends a U gate to the circuit.
+For more details, refer to the Qiskit documentation:
+<a class="reference external" href="https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit">https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>theta</strong> (<em>ParameterValueType</em>) – The theta parameter for the U gate.</p></li>
+<li><p><strong>phi</strong> (<em>ParameterValueType</em>) – The phi parameter for the U gate.</p></li>
+<li><p><strong>lam</strong> (<em>ParameterValueType</em>) – The lambda parameter for the U gate.</p></li>
+<li><p><strong>qubit</strong> (<em>QubitSpecifier</em>) – The qubit to which the gate will be applied.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbcquantum.circuit.AssertQuantumCircuit.x">
+<span class="sig-name descname"><span class="pre">x</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qubit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dbcquantum/circuit.html#AssertQuantumCircuit.x"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbcquantum.circuit.AssertQuantumCircuit.x" title="Link to this definition">¶</a></dt>
+<dd><p>Appends a X gate to the circuit.
+For more details, refer to the Qiskit documentation:
+<a class="reference external" href="https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit">https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>qubit</strong> (<em>QubitSpecifier</em>) – The qubit to which the gate will be applied.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbcquantum.circuit.AssertQuantumCircuit.y">
+<span class="sig-name descname"><span class="pre">y</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qubit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dbcquantum/circuit.html#AssertQuantumCircuit.y"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbcquantum.circuit.AssertQuantumCircuit.y" title="Link to this definition">¶</a></dt>
+<dd><p>Appends a Y gate to the circuit.
+For more details, refer to the Qiskit documentation:
+<a class="reference external" href="https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit">https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>qubit</strong> (<em>QubitSpecifier</em>) – The qubit to which the gate will be applied.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbcquantum.circuit.AssertQuantumCircuit.z">
+<span class="sig-name descname"><span class="pre">z</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qubit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dbcquantum/circuit.html#AssertQuantumCircuit.z"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbcquantum.circuit.AssertQuantumCircuit.z" title="Link to this definition">¶</a></dt>
+<dd><p>Appends a Z gate to the circuit.
+For more details, refer to the Qiskit documentation:
+<a class="reference external" href="https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit">https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>qubit</strong> (<em>QubitSpecifier</em>) – The qubit to which the gate will be applied.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="dbcquantum.common.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">dbcquantum.common module</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="dbcquantum.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">dbcquantum package</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, Fujitsu Limited
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">dbcquantum.circuit module</a><ul>
+<li><a class="reference internal" href="#dbcquantum.circuit.AQCMeasure"><code class="docutils literal notranslate"><span class="pre">AQCMeasure</span></code></a><ul>
+<li><a class="reference internal" href="#dbcquantum.circuit.AQCMeasure.add_condition"><code class="docutils literal notranslate"><span class="pre">AQCMeasure.add_condition()</span></code></a></li>
+<li><a class="reference internal" href="#dbcquantum.circuit.AQCMeasure.add_condition_use_param"><code class="docutils literal notranslate"><span class="pre">AQCMeasure.add_condition_use_param()</span></code></a></li>
+<li><a class="reference internal" href="#dbcquantum.circuit.AQCMeasure.add_conditions_gen"><code class="docutils literal notranslate"><span class="pre">AQCMeasure.add_conditions_gen()</span></code></a></li>
+<li><a class="reference internal" href="#dbcquantum.circuit.AQCMeasure.num_qubits"><code class="docutils literal notranslate"><span class="pre">AQCMeasure.num_qubits</span></code></a></li>
+<li><a class="reference internal" href="#dbcquantum.circuit.AQCMeasure.remove_assertions"><code class="docutils literal notranslate"><span class="pre">AQCMeasure.remove_assertions()</span></code></a></li>
+<li><a class="reference internal" href="#dbcquantum.circuit.AQCMeasure.remove_assertions_to_circuit"><code class="docutils literal notranslate"><span class="pre">AQCMeasure.remove_assertions_to_circuit()</span></code></a></li>
+<li><a class="reference internal" href="#dbcquantum.circuit.AQCMeasure.run"><code class="docutils literal notranslate"><span class="pre">AQCMeasure.run()</span></code></a></li>
+<li><a class="reference internal" href="#dbcquantum.circuit.AQCMeasure.run_without_assertion"><code class="docutils literal notranslate"><span class="pre">AQCMeasure.run_without_assertion()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit"><code class="docutils literal notranslate"><span class="pre">AssertQuantumCircuit</span></code></a><ul>
+<li><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit.add_condition"><code class="docutils literal notranslate"><span class="pre">AssertQuantumCircuit.add_condition()</span></code></a></li>
+<li><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit.add_condition_use_param"><code class="docutils literal notranslate"><span class="pre">AssertQuantumCircuit.add_condition_use_param()</span></code></a></li>
+<li><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit.add_conditions_gen"><code class="docutils literal notranslate"><span class="pre">AssertQuantumCircuit.add_conditions_gen()</span></code></a></li>
+<li><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit.add_eq_circuit"><code class="docutils literal notranslate"><span class="pre">AssertQuantumCircuit.add_eq_circuit()</span></code></a></li>
+<li><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit.add_eq_circuit_use_param"><code class="docutils literal notranslate"><span class="pre">AssertQuantumCircuit.add_eq_circuit_use_param()</span></code></a></li>
+<li><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit.add_eq_circuits_gen"><code class="docutils literal notranslate"><span class="pre">AssertQuantumCircuit.add_eq_circuits_gen()</span></code></a></li>
+<li><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit.add_post_condition"><code class="docutils literal notranslate"><span class="pre">AssertQuantumCircuit.add_post_condition()</span></code></a></li>
+<li><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit.add_post_condition_use_param"><code class="docutils literal notranslate"><span class="pre">AssertQuantumCircuit.add_post_condition_use_param()</span></code></a></li>
+<li><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit.add_post_conditions_gen"><code class="docutils literal notranslate"><span class="pre">AssertQuantumCircuit.add_post_conditions_gen()</span></code></a></li>
+<li><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit.add_pre_condition"><code class="docutils literal notranslate"><span class="pre">AssertQuantumCircuit.add_pre_condition()</span></code></a></li>
+<li><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit.add_pre_condition_use_param"><code class="docutils literal notranslate"><span class="pre">AssertQuantumCircuit.add_pre_condition_use_param()</span></code></a></li>
+<li><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit.add_pre_conditions_gen"><code class="docutils literal notranslate"><span class="pre">AssertQuantumCircuit.add_pre_conditions_gen()</span></code></a></li>
+<li><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit.append"><code class="docutils literal notranslate"><span class="pre">AssertQuantumCircuit.append()</span></code></a></li>
+<li><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit.append_superposition"><code class="docutils literal notranslate"><span class="pre">AssertQuantumCircuit.append_superposition()</span></code></a></li>
+<li><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit.append_superposition_basis"><code class="docutils literal notranslate"><span class="pre">AssertQuantumCircuit.append_superposition_basis()</span></code></a></li>
+<li><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit.append_superposition_basis_from_param"><code class="docutils literal notranslate"><span class="pre">AssertQuantumCircuit.append_superposition_basis_from_param()</span></code></a></li>
+<li><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit.append_superposition_gen"><code class="docutils literal notranslate"><span class="pre">AssertQuantumCircuit.append_superposition_gen()</span></code></a></li>
+<li><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit.barrier"><code class="docutils literal notranslate"><span class="pre">AssertQuantumCircuit.barrier()</span></code></a></li>
+<li><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit.ccx"><code class="docutils literal notranslate"><span class="pre">AssertQuantumCircuit.ccx()</span></code></a></li>
+<li><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit.copy"><code class="docutils literal notranslate"><span class="pre">AssertQuantumCircuit.copy()</span></code></a></li>
+<li><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit.cp"><code class="docutils literal notranslate"><span class="pre">AssertQuantumCircuit.cp()</span></code></a></li>
+<li><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit.cx"><code class="docutils literal notranslate"><span class="pre">AssertQuantumCircuit.cx()</span></code></a></li>
+<li><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit.h"><code class="docutils literal notranslate"><span class="pre">AssertQuantumCircuit.h()</span></code></a></li>
+<li><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit.i"><code class="docutils literal notranslate"><span class="pre">AssertQuantumCircuit.i()</span></code></a></li>
+<li><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit.inverse"><code class="docutils literal notranslate"><span class="pre">AssertQuantumCircuit.inverse()</span></code></a></li>
+<li><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit.num_qubits"><code class="docutils literal notranslate"><span class="pre">AssertQuantumCircuit.num_qubits</span></code></a></li>
+<li><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit.p"><code class="docutils literal notranslate"><span class="pre">AssertQuantumCircuit.p()</span></code></a></li>
+<li><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit.remove_assertions"><code class="docutils literal notranslate"><span class="pre">AssertQuantumCircuit.remove_assertions()</span></code></a></li>
+<li><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit.run"><code class="docutils literal notranslate"><span class="pre">AssertQuantumCircuit.run()</span></code></a></li>
+<li><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit.run_without_assertion"><code class="docutils literal notranslate"><span class="pre">AssertQuantumCircuit.run_without_assertion()</span></code></a></li>
+<li><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit.rx"><code class="docutils literal notranslate"><span class="pre">AssertQuantumCircuit.rx()</span></code></a></li>
+<li><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit.ry"><code class="docutils literal notranslate"><span class="pre">AssertQuantumCircuit.ry()</span></code></a></li>
+<li><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit.rz"><code class="docutils literal notranslate"><span class="pre">AssertQuantumCircuit.rz()</span></code></a></li>
+<li><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit.rzx"><code class="docutils literal notranslate"><span class="pre">AssertQuantumCircuit.rzx()</span></code></a></li>
+<li><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit.s"><code class="docutils literal notranslate"><span class="pre">AssertQuantumCircuit.s()</span></code></a></li>
+<li><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit.sdg"><code class="docutils literal notranslate"><span class="pre">AssertQuantumCircuit.sdg()</span></code></a></li>
+<li><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit.swap"><code class="docutils literal notranslate"><span class="pre">AssertQuantumCircuit.swap()</span></code></a></li>
+<li><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit.sx"><code class="docutils literal notranslate"><span class="pre">AssertQuantumCircuit.sx()</span></code></a></li>
+<li><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit.sxdg"><code class="docutils literal notranslate"><span class="pre">AssertQuantumCircuit.sxdg()</span></code></a></li>
+<li><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit.t"><code class="docutils literal notranslate"><span class="pre">AssertQuantumCircuit.t()</span></code></a></li>
+<li><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit.tdg"><code class="docutils literal notranslate"><span class="pre">AssertQuantumCircuit.tdg()</span></code></a></li>
+<li><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit.toffoli"><code class="docutils literal notranslate"><span class="pre">AssertQuantumCircuit.toffoli()</span></code></a></li>
+<li><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit.u"><code class="docutils literal notranslate"><span class="pre">AssertQuantumCircuit.u()</span></code></a></li>
+<li><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit.x"><code class="docutils literal notranslate"><span class="pre">AssertQuantumCircuit.x()</span></code></a></li>
+<li><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit.y"><code class="docutils literal notranslate"><span class="pre">AssertQuantumCircuit.y()</span></code></a></li>
+<li><a class="reference internal" href="#dbcquantum.circuit.AssertQuantumCircuit.z"><code class="docutils literal notranslate"><span class="pre">AssertQuantumCircuit.z()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=76e2d817"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    </body>
+</html>
