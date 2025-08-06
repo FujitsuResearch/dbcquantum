@@ -2,6 +2,9 @@
 
 This framework enables us to verify quantum applications through assertions. We can write any assertions about the pre-states and post-states of quantum circuits. These assertions are verified on a quantum computer simulator using test cases. Additionally, the framework allows us to verify the post-processing of measurement results.
 
+For a detailed description, please refer to our papers:  
+- *Masaomi Yamaguchi, Nobukazu Yoshioka, and Fuyuki Ishikawa. 2025. Practical Design by Contract Framework for Quantum Applications. In Proceedings of the 33rd ACM International Conference on the Foundations of Software Engineering (FSE Companion '25). Association for Computing Machinery, New York, NY, USA, 1699–1709. https://doi.org/10.1145/3696630.3731621*
+- *Masaomi Yamaguchi and Nobukazu Yoshioka. 2023. Design by Contract Framework for Quantum Software . In 2023 IEEE/ACM 4th International Workshop on Quantum Software Engineering (Q-SE) , IEEE Computer Society, Los Alamitos, CA, USA, 24–25. https://doi.org/10.1109/Q-SE59154.2023.00010*
 
 ## Installation
 
